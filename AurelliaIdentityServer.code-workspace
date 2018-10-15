@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "Aurelia.Client"
+		},
+		{
+			"path": "Aurelia.IdentityServer"
+		},
+		{
+			"path": "Aurelia.WebApi"
+		}
+	],
+	"settings": {}
+}
