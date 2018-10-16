@@ -26,7 +26,7 @@ export default {
     checkSessionInterval: 2000,
 
     // The client or application ID that the authority issues.
-    client_id: "implicit",
+    client_id: "aurelia_web_api_client_spa",
 
     filterProtocolClaims: true,
     loadUserInfo: false,
