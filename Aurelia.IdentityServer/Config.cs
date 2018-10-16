@@ -47,9 +47,9 @@ namespace Aurelia.IdentityServer
 
 				AllowAccessTokensViaBrowser = true ,
 
-				RedirectUris = { "https://localhost:44380/callback.html" } ,
-				PostLogoutRedirectUris = { "https://localhost:44380/logout.html" },
-				AllowedCorsOrigins = { "https://localhost:44380/" } ,
+				RedirectUris = { "https://localhost:44347/signin-oidc" } ,
+				PostLogoutRedirectUris = { "https://localhost:44347/signout-oidc" },
+				AllowedCorsOrigins = { "https://localhost:44347" } ,
 
 				AllowedScopes = {
 					StandardScopes.OpenId ,

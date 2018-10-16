@@ -30,9 +30,11 @@ export class App {
     config.title = 'Title';
     config.map([
       {
-        route: '', name: 'home',
+        route: '/home', name: 'home',
         moduleId: PLATFORM.moduleName('./routes/home/home'),
-        nav: true, title: 'Home', settings: { auth: true, roles: [OpenIdConnectRoles.Authenticated], }
+        nav: true, title: 'Home',  settings: {
+          roles: [OpenIdConnectRoles.Authenticated]
+        }
       },
       {
         route: '/login', name: 'login',
@@ -46,7 +48,7 @@ export class App {
       }
     ]);
 
-    this.openIdConnect.configure(routerConfiguration);
+    this.openIdConnect.configure(config);
     this.router = router;
 
   }

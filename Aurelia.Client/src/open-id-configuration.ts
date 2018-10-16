@@ -7,7 +7,7 @@ const appHost = "https://localhost:44347";
 export default {
   loginRedirectRoute: "/home",
   logoutRedirectRoute: "/logout",
-  unauthorizedRedirectRoute: "/logout",
+  unauthorizedRedirectRoute: "/login",
   userManagerSettings: {
 
     // The number of seconds in advance of access token expiry
@@ -16,7 +16,7 @@ export default {
 
     // Either host your own OpenID Provider or select a certified authority
     // from the list http://openid.net/certification/
-    authority: "https://localhost:44345",
+    authority: "https://localhost:44345/",
 
     automaticSilentRenew: true,
 
@@ -33,7 +33,7 @@ export default {
     post_logout_redirect_uri: `${appHost}/signout-oidc`,
     redirect_uri: `${appHost}/signin-oidc`,
     response_type: "id_token",
-    scope: "aurelia_web_api",
+    scope: "openid profile aurelia_web_api",
     // number of millisecods to wait for the authorization
     // server to response to silent renew request
     silentRequestTimeout: 10000,
