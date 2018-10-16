@@ -1,19 +1,53 @@
+import { RouterConfiguration, Router } from 'aurelia-router';
 
 import "toastr/build/toastr.css";
 import "font-awesome/css/font-awesome.css";
 
 
 import { ToastrService } from 'aurelia-toolbelt';
-import { inject } from 'aurelia-dependency-injection';
+import { autoinject } from 'aurelia-dependency-injection';
+import { PLATFORM } from 'aurelia-pal';
 
-@inject(ToastrService)
+import { User } from "oidc-client";
+import { OpenIdConnect, OpenIdConnectRoles } from "aurelia-open-id-connect";
+
+@autoinject()
 export class App {
-  message = 'Hello World!';
 
-  constructor(private ts: ToastrService) {
+  private router: Router;
+  private user: User;
+
+  constructor(private openIdConnect: OpenIdConnect) {
+    this.openIdConnect.observeUser((user: User) => this.user = user);
   }
 
-  alertMessage() {
-    this.ts.success('Thanks buddy :+1:');
+  private configureRouter(config: RouterConfiguration, router: Router): void {
+
+
+    // switch from hash (#) to slash (/) navigation
+    config.options.pushState = true;
+
+    config.title = 'Title';
+    config.map([
+      {
+        route: '', name: 'home',
+        moduleId: PLATFORM.moduleName('./routes/home/home'),
+        nav: true, title: 'Home', settings: { auth: true, roles: [OpenIdConnectRoles.Authenticated], }
+      },
+      {
+        route: '/login', name: 'login',
+        moduleId: PLATFORM.moduleName('./routes/auth/login'),
+        nav: true, title: 'Login'
+      },
+      {
+        route: '/logout', name: 'logout',
+        moduleId: PLATFORM.moduleName('./routes/auth/logout'),
+        nav: true, title: 'Logout'
+      }
+    ]);
+
+    this.openIdConnect.configure(routerConfiguration);
+    this.router = router;
+
   }
 }

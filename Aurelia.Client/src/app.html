@@ -1,24 +1,18 @@
 <template>
 
+  <br /><br /><br />
 
-  <br />
+  <ul repeat.for="nav of router.navigation">
+    <li class="${nav.isActive ? 'active' : ''}">
+      <a href.bind="nav.href">
+        ${nav.title}
+      </a>
+    </li>
+  </ul>
 
-  <div class="container">
+  <hr />
 
-    <aut-clock>
 
-    </aut-clock>
-
-    <aut-divider>
-      and rate us
-    </aut-divider>
-
-    <div class="fa-2x text-center">
-      <abt-star-rate rate-changed.call="alertMessage()">
-
-      </abt-star-rate>
-    </div>
-
-  </div>
+  <router-view></router-view>
 
 </template>

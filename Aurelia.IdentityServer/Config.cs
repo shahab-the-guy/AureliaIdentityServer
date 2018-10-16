@@ -41,9 +41,9 @@ namespace Aurelia.IdentityServer
 				ClientName = "Aurelia SPA Application",
 				ClientId = "aurelia_web_api_client_spa",
 
-				ClientSecrets = new []{ new Secret("secret".Sha256()) } , // this is nott required since we will redirect the user to the identity server login page and we do not want back-end token validation
+				ClientSecrets = new []{ new Secret("secret".Sha256()) } , // this is not required since we will redirect the user to the identity server login page and we do not want back-end token validation
 
-				AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+				AllowedGrantTypes = GrantTypes.Implicit,
 
 				AllowAccessTokensViaBrowser = true ,
 
