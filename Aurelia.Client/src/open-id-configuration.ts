@@ -5,8 +5,8 @@ import { UserManagerSettings, WebStorageStateStore } from "oidc-client";
 const appHost = "https://localhost:44347";
 
 export default {
-  loginRedirectRoute: "/home",
-  logoutRedirectRoute: "/logout",
+  loginRedirectRoute: "/login",
+  logoutRedirectRoute: "/index",
   unauthorizedRedirectRoute: "/login",
   userManagerSettings: {
 
@@ -32,8 +32,8 @@ export default {
     loadUserInfo: false,
     post_logout_redirect_uri: `${appHost}/signout-oidc`,
     redirect_uri: `${appHost}/signin-oidc`,
-    response_type: "id_token",
-    scope: "openid profile aurelia_web_api",
+    response_type: "id_token token",
+    scope: "openid aurelia_web_api",
     // number of millisecods to wait for the authorization
     // server to response to silent renew request
     silentRequestTimeout: 10000,

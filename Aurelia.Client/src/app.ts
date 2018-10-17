@@ -14,15 +14,16 @@ import { OpenIdConnect, OpenIdConnectRoles } from "aurelia-open-id-connect";
 @autoinject()
 export class App {
 
-  private router: Router;
-  private user: User;
+  public router: Router;
+  public user: User;
 
   constructor(private openIdConnect: OpenIdConnect) {
+
     this.openIdConnect.observeUser((user: User) => this.user = user);
+
   }
 
   private configureRouter(config: RouterConfiguration, router: Router): void {
-
 
     // switch from hash (#) to slash (/) navigation
     config.options.pushState = true;
@@ -32,9 +33,15 @@ export class App {
       {
         route: '/home', name: 'home',
         moduleId: PLATFORM.moduleName('./routes/home/home'),
-        nav: true, title: 'Home',  settings: {
+        nav: true, title: 'Home',
+        settings: {
           roles: [OpenIdConnectRoles.Authenticated]
         }
+      },
+      {
+        route: ['', '/index'], name: 'index',
+        moduleId: PLATFORM.moduleName('./routes/home/index'),
+        nav: true, title: 'Index'
       },
       {
         route: '/login', name: 'login',
@@ -44,7 +51,7 @@ export class App {
       {
         route: '/logout', name: 'logout',
         moduleId: PLATFORM.moduleName('./routes/auth/logout'),
-        nav: true, title: 'Logout'
+        nav: false, title: 'Logout'
       }
     ]);
 

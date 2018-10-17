@@ -1,7 +1,7 @@
-﻿using IdentityServer4.Models;
+﻿using IdentityServer4;
+using IdentityServer4.Models;
 using IdentityServer4.Test;
 using System.Collections.Generic;
-using static IdentityServer4.IdentityServerConstants;
 
 namespace Aurelia.IdentityServer
 {
@@ -9,15 +9,15 @@ namespace Aurelia.IdentityServer
 	{
 
 		public static IEnumerable<IdentityResource> IdentityResources =>
-				new List<IdentityResource>() {
+				new List<IdentityResource> {
 					new IdentityResources.OpenId() ,
 					new IdentityResources.Profile()
 				};
 
 		public static IEnumerable<ApiResource> ApiResources =>
 
-				new List<ApiResource>() {
-					new ApiResource( ApiScopes.AureliaApiScope , "Aurelia WebApi") {
+				new[] {
+					new ApiResource( "aurelia_web_api" , "Aurelia WebApi") {
 
 						ApiSecrets = { new Secret( "apisecret".Sha256() ) }
 					}
@@ -38,10 +38,10 @@ namespace Aurelia.IdentityServer
 
 			new Client() {
 
-				ClientName = "Aurelia SPA Application",
 				ClientId = "aurelia_web_api_client_spa",
+				ClientName = "Aurelia SPA Application",
 
-				ClientSecrets = new []{ new Secret("secret".Sha256()) } , // this is not required since we will redirect the user to the identity server login page and we do not want back-end token validation
+				// ClientSecrets = new []{ new Secret("secret".Sha256()) } , // this is not required since we will redirect the user to the identity server login page and we do not want back-end token validation
 
 				AllowedGrantTypes = GrantTypes.Implicit,
 
@@ -51,11 +51,12 @@ namespace Aurelia.IdentityServer
 				PostLogoutRedirectUris = { "https://localhost:44347/signout-oidc" },
 				AllowedCorsOrigins = { "https://localhost:44347" } ,
 
-				AllowedScopes = {
-					StandardScopes.OpenId ,
-					StandardScopes.Profile , 
+				AllowedScopes = new List<string>() {
 
-					ApiScopes.AureliaApiScope
+					IdentityServerConstants.StandardScopes.OpenId,
+					IdentityServerConstants.StandardScopes.Profile ,
+
+					"aurelia_web_api"
 				}
 			}
 
