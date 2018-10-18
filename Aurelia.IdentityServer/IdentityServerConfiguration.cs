@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Aurelia.IdentityServer
 {
-	public static class Config
+	public static class IdentityServerConfiguration
 	{
 
 		public static IEnumerable<IdentityResource> IdentityResources =>

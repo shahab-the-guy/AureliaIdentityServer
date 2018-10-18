@@ -14,15 +14,15 @@ namespace Aurelia.IdentityServer
 
 			services.AddMvc();
 
-			var apiResources = Config.ApiResources;
-			var clients = Config.Clients;
+			var apiResources = IdentityServerConfiguration.ApiResources;
+			var clients = IdentityServerConfiguration.Clients;
 
 			services.AddIdentityServer()
 				.AddDeveloperSigningCredential()
-				.AddTestUsers(Config.Users)
+				.AddTestUsers(IdentityServerConfiguration.Users)
 				.AddInMemoryClients(clients)
 				.AddInMemoryApiResources(apiResources)
-				.AddInMemoryIdentityResources(Config.IdentityResources);
+				.AddInMemoryIdentityResources(IdentityServerConfiguration.IdentityResources);
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
