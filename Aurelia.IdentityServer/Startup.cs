@@ -14,14 +14,11 @@ namespace Aurelia.IdentityServer
 
 			services.AddMvc();
 
-			var apiResources = IdentityServerConfiguration.ApiResources;
-			var clients = IdentityServerConfiguration.Clients;
-
 			services.AddIdentityServer()
 				.AddDeveloperSigningCredential()
 				.AddTestUsers(IdentityServerConfiguration.Users)
-				.AddInMemoryClients(clients)
-				.AddInMemoryApiResources(apiResources)
+				.AddInMemoryClients(IdentityServerConfiguration.Clients)
+				.AddInMemoryApiResources(IdentityServerConfiguration.ApiResources)
 				.AddInMemoryIdentityResources(IdentityServerConfiguration.IdentityResources);
 		}
 
