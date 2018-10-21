@@ -3,8 +3,6 @@ import { RouterConfiguration, Router } from 'aurelia-router';
 import "toastr/build/toastr.css";
 import "font-awesome/css/font-awesome.css";
 
-
-import { ToastrService } from 'aurelia-toolbelt';
 import { autoinject } from 'aurelia-dependency-injection';
 import { PLATFORM } from 'aurelia-pal';
 
@@ -18,9 +16,7 @@ export class App {
   public user: User;
 
   constructor(private openIdConnect: OpenIdConnect) {
-
     this.openIdConnect.observeUser((user: User) => this.user = user);
-
   }
 
   private configureRouter(config: RouterConfiguration, router: Router): void {
