@@ -1,32 +1,26 @@
 <template>
-    
-      <div class="container">
-    
-        <aut-clock>
-    
-        </aut-clock>
-    
-        <aut-divider>
-          and rate us
-        </aut-divider>
-    
-        <div class="fa-2x text-center">
-          <abt-star-rate rate-changed.call="alertMessage()">
-    
-          </abt-star-rate>
-        </div>
+  <div class="container">
+    <aut-clock>
+    </aut-clock>
 
-        <hr />
+    <hr />
+    <fieldset>
+      <legend>
+        SPA Frameworks: 
+      </legend>
+      <abt-listgroup>
+        <abt-listgroup-item repeat.for="spa of frameworks">
+          ${spa}
+        </abt-listgroup-item>
+      </abt-listgroup>
+    </fieldset>
+    <hr />
 
 
-        <abt-button bs-type="warning" click.call="logout()">
-            Logout
-        </abt-button>
-
-
-        <hr />
-
-        <open-id-connect-user-debug></open-id-connect-user-debug>
-    
-      </div>
+    <abt-button bs-type="warning" click.call="logout()">
+      Logout
+    </abt-button>
+    <br />
+    <open-id-connect-user-debug></open-id-connect-user-debug>
+  </div>
 </template>

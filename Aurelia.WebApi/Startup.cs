@@ -13,53 +13,55 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Aurelia.WebApi
-{
-    public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
+namespace Aurelia.WebApi {
+    public class Startup {
+        public Startup (IConfiguration configuration) {
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+        public void ConfigureServices (IServiceCollection services) {
+            services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_1);
 
 			services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
 				.AddIdentityServerAuthentication(options =>
-			   {
-				   // the identity server url
-				   options.Authority = "https://localhost:44345/";
+				{
+					// the identity server url
+					options.Authority = "https://localhost:44345/";
 
-				   // api resource information defined in identity server
-				   options.ApiName = "aurelia_web_api";
-				   options.ApiSecret = "apisecret";
+					// api resource information defined in identity server
+					options.ApiName = "aurelia_web_api";
+					options.ApiSecret = "apisecret";
 
-				   // whether the connection betweeen this resource and the ISP be secure or not
-				   options.RequireHttpsMetadata = true;
-			   });
+					// whether the connection betweeen this resource and the ISP be secure or not
+					options.RequireHttpsMetadata = true;
+				});
+			services.AddCors(build =>
+		   {
+			   build.AddPolicy("corsenabler", p =>
+			  {
+				  p.WithOrigins("https://localhost:44347").AllowAnyMethod().AllowAnyHeader();
+			  });
+		   });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseHsts();
+        public void Configure (IApplicationBuilder app, IHostingEnvironment env) {
+
+			if (env.IsDevelopment ()) {
+                app.UseDeveloperExceptionPage ();
+            } else {
+                app.UseHsts ();
             }
 
-			app.UseAuthentication();
+			app.UseCors("corsenabler");
 
-            app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseAuthentication ();
+
+            app.UseHttpsRedirection ();
+            app.UseMvc ();
         }
     }
 }

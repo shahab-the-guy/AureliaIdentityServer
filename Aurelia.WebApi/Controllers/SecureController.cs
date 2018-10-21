@@ -16,7 +16,7 @@ namespace Aurelia.WebApi.Controllers
 
 		public IActionResult Get()
 		{
-			var result = new[] { "shahab", "bahar" };
+			var result = new[] { "Aurelia" , "Angular" , "Vue" , "React" };
 
 			return Ok(result);
 		}

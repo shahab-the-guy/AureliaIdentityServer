@@ -41,17 +41,12 @@ export class App {
       {
         route: ['', '/index'], name: 'index',
         moduleId: PLATFORM.moduleName('./routes/home/index'),
-        nav: true, title: 'Index'
+        nav: true, title: 'Index', settings: { roles: [OpenIdConnectRoles.Everyone] }
       },
       {
         route: '/login', name: 'login',
         moduleId: PLATFORM.moduleName('./routes/auth/login'),
-        nav: true, title: 'Login'
-      },
-      {
-        route: '/logout', name: 'logout',
-        moduleId: PLATFORM.moduleName('./routes/auth/logout'),
-        nav: false, title: 'Logout'
+        nav: true, title: 'Login', settings: { roles: [ OpenIdConnectRoles.Anonymous ] }
       }
     ]);
 

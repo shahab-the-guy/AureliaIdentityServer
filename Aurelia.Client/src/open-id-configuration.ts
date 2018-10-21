@@ -5,9 +5,10 @@ import { UserManagerSettings, WebStorageStateStore } from "oidc-client";
 const appHost = "https://localhost:44347";
 
 export default {
-  loginRedirectRoute: "/login",
-  logoutRedirectRoute: "/index",
-  unauthorizedRedirectRoute: "/login",
+  loginRedirectRoute: "/login",  // if the user is not authenticated the aurelia router will route you here
+  logoutRedirectRoute: "/index", // after a successful logout the aurelia router will land you here
+  unauthorizedRedirectRoute: "/login", // if the user is unauthorized you must see this page
+  
   userManagerSettings: {
 
     // The number of seconds in advance of access token expiry
@@ -16,7 +17,7 @@ export default {
 
     // Either host your own OpenID Provider or select a certified authority
     // from the list http://openid.net/certification/
-    authority: "https://localhost:44345/",
+    authority: "https://localhost:44345/", 
 
     automaticSilentRenew: true,
 
