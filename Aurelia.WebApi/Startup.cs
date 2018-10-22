@@ -25,38 +25,37 @@ namespace Aurelia.WebApi {
         public void ConfigureServices (IServiceCollection services) {
             services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_1);
 
-			services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
-				.AddIdentityServerAuthentication(options =>
-				{
-					// the identity server url
-					options.Authority = "https://localhost:44345/";
+            services.AddAuthentication (IdentityServerAuthenticationDefaults.AuthenticationScheme)
+                .AddIdentityServerAuthentication (options => {
+                    // the identity server url
+                    options.Authority = "https://localhost:44345/";
 
-					// api resource information defined in identity server
-					options.ApiName = "aurelia_web_api";
-					options.ApiSecret = "apisecret";
+                    // api resource information defined in identity server
+                    options.ApiName = "aurelia_web_api";
+                    options.ApiSecret = "apisecret";
 
-					// whether the connection betweeen this resource and the ISP be secure or not
-					options.RequireHttpsMetadata = true;
-				});
-			services.AddCors(build =>
-		   {
-			   build.AddPolicy("corsenabler", p =>
-			  {
-				  p.WithOrigins("https://localhost:44347").AllowAnyMethod().AllowAnyHeader();
-			  });
-		   });
+                    // whether the connection betweeen this resource and the ISP be secure or not
+                    options.RequireHttpsMetadata = true;
+                });
+                
+            services.AddCors (build => {
+                build.AddPolicy ("corsenabler", p => {
+                    p.AllowAnyOrigin().AllowAnyMethod ().AllowAnyHeader ();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure (IApplicationBuilder app, IHostingEnvironment env) {
 
-			if (env.IsDevelopment ()) {
+            app.UseCors ("corsenabler");
+
+            if (env.IsDevelopment ()) {
                 app.UseDeveloperExceptionPage ();
             } else {
                 app.UseHsts ();
             }
 
-			app.UseCors("corsenabler");
 
             app.UseAuthentication ();
 
