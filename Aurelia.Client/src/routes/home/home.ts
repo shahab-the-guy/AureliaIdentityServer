@@ -6,7 +6,6 @@ import { HttpClient } from "aurelia-http-client";
 export class Home {
 
   private access_token;
-
   private frameworks: Array<any>;
 
   constructor(private openIdConnect: OpenIdConnect, private httpClient: HttpClient) { }
@@ -17,7 +16,8 @@ export class Home {
     this.httpClient.configure(config => {
       config.withBaseUrl("https://localhost:44346/")
         .withHeader('Accept', 'application/json')
-        .withHeader('Authorization', `Bearer ${this.access_token}`); // adds the access token, so that we can call secure apis
+        // adds the access token, so that we can call secure apis
+        .withHeader('Authorization', `Bearer ${this.access_token}`); 
     });
 
     return this.httpClient.get('api/secure')
@@ -27,10 +27,8 @@ export class Home {
 
   }
 
-
   private logout() {
     this.openIdConnect.logout();
   }
-
 
 }

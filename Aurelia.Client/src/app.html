@@ -1,21 +1,18 @@
 <template>
 
-  <br /><br /><br />
-
   <div class="container">
 
-  <ul repeat.for="nav of router.navigation | openIdConnectNavigationFilter:user">
-    <li class="${nav.isActive ? 'active' : ''}">
-      <a href.bind="nav.href">
-        ${nav.title}
-      </a>
-    </li>
-  </ul>
+    <ul repeat.for="nav of router.navigation | openIdConnectNavigationFilter:user">
+      <li class="${nav.isActive ? 'active' : ''}">
+        <a href.bind="nav.href">
+          ${nav.title}
+        </a>
+      </li>
+    </ul>
 
-  <hr />
+    <hr />
 
-
-  <router-view></router-view>
+    <router-view></router-view>
 
   </div>
 
